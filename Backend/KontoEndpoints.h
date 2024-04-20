@@ -1,4 +1,7 @@
 #pragma once
-#include "cpp-httplib/httplib.h";
+#include "Page.h"
 
-void KontoHandler(const httplib::Request& req, httplib::Response& res);
+namespace Konto {
+	const int numberOfEndpoints = 1;
+	extern const Page::Page pages[numberOfEndpoints];
+}

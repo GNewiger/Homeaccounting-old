@@ -1,7 +1,12 @@
 #include "KontoEndpoints.h"
-#include "cpp-httplib/httplib.h";
+#include "Page.h"
 
-void KontoHandler(const httplib::Request& req, httplib::Response& res) {
-    res.set_content("<head><body>Hello from Homeaccounting!</body></head>", "text/html");
-    return;
-};
+namespace Konto {
+	static const Response::Response allKonten() {
+		return { 200, "{\"0\": {\"name\": \"Bafoeg\", \"isHaben\": 1}}" };
+	}
+
+	const Page::Page pages[numberOfEndpoints] = {
+		{"/konten", "GET", allKonten}
+	};
+}
