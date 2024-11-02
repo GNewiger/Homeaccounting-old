@@ -23,6 +23,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(homeaccounting-qt
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        kontentab.h kontentab.cpp
+        kontocreatedialog.h kontocreatedialog.cpp
+        kontocreatedialog.h kontocreatedialog.cpp kontocreatedialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET homeaccounting-qt APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
