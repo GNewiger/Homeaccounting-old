@@ -2,6 +2,7 @@
 #include <QTableWidgetItem>
 #include <QVBoxLayout>
 #include "kontocreatedialog.h"
+#include <QHeaderView>
 
 KontenTab::KontenTab(QWidget *parent) : QWidget(parent), tableKonten(this), btnAdd(){
     tableKonten.setMinimumWidth(800);
@@ -24,12 +25,7 @@ KontenTab::KontenTab(QWidget *parent) : QWidget(parent), tableKonten(this), btnA
     QObject::connect(&tableKonten, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(handleItemClicked(QTableWidgetItem*)));
     tableKonten.setItem(10, 0, &btnAdd);
     tableKonten.setSpan(10,0,1,2);
-    restoreStandardLayout();
-}
-
-void KontenTab::restoreStandardLayout(){
-    QFontMetrics fm(tableKonten.font());
-
+    tableKonten.horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 void KontenTab::handleItemClicked(QTableWidgetItem* item){
@@ -48,5 +44,4 @@ void KontenTab::addKont(QString name){
     tableKonten.insertRow(indexLastItem);
     tableKonten.setItem(indexLastItem + 1, 0, someName);
     tableKonten.setItem(indexLastItem + 1, 1, someSaldo);
-    restoreStandardLayout();
 }

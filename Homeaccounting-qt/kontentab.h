@@ -16,7 +16,6 @@ private:
     QTableWidgetItem btnAdd;
 
 private slots:
-    void restoreStandardLayout();
     void handleItemClicked(QTableWidgetItem*);
     void addKont(QString);
 };
