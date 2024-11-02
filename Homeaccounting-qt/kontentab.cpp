@@ -17,14 +17,12 @@ KontenTab::KontenTab(QWidget *parent) : QWidget(parent), tableKonten(this), btnA
     headers.append("Saldo");
     tableKonten.setHorizontalHeaderLabels(headers);
 
-    for(int i = 0; i < 11; ++i){
-        tableKonten.insertRow(i);
-    }
     btnAdd.setText("Hinzufügen");
     btnAdd.setTextAlignment(Qt::AlignCenter);
     QObject::connect(&tableKonten, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(handleItemClicked(QTableWidgetItem*)));
-    tableKonten.setItem(10, 0, &btnAdd);
-    tableKonten.setSpan(10,0,1,2);
+    tableKonten.insertRow(0);
+    tableKonten.setItem(0, 0, &btnAdd);
+    tableKonten.setSpan(0,0,1,2);
     tableKonten.horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
@@ -37,11 +35,27 @@ void KontenTab::handleItemClicked(QTableWidgetItem* item){
 }
 
 void KontenTab::addKonto(QString name){
-    QTableWidgetItem* someName = new QTableWidgetItem(name);
-    QTableWidgetItem* someSaldo = new QTableWidgetItem("0");
-    size_t indexLastItem = tableKonten.rowCount() - 2; // the last item is actually the add button, so insert the new item to second last position
+    struct Konto konto = {0, name};
+    addKonto(konto);
+}
 
+void KontenTab::addKonto(Konto konto){
+    konten.append(konto);
+    QTableWidgetItem* name = new QTableWidgetItem(konto.name);
+    QTableWidgetItem* saldo = new QTableWidgetItem(konto.saldo);
+    short indexLastItem = tableKonten.rowCount() - 1;
+
+    //remove add button
+    tableKonten.takeItem(indexLastItem, 0);
+    tableKonten.removeRow(indexLastItem);
+
+    // add new item
     tableKonten.insertRow(indexLastItem);
-    tableKonten.setItem(indexLastItem + 1, 0, someName);
-    tableKonten.setItem(indexLastItem + 1, 1, someSaldo);
+    tableKonten.setItem(indexLastItem, 0, name);
+    tableKonten.setItem(indexLastItem, 1, saldo);
+
+    // re-insert add button (so it's the last bztton)
+    tableKonten.insertRow(indexLastItem + 1);
+    tableKonten.setItem(indexLastItem + 1, 0, &btnAdd);
+    tableKonten.setSpan(indexLastItem + 1,0,1,2);
 }
