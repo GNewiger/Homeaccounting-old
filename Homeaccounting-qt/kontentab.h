@@ -17,7 +17,7 @@ private:
 
 private slots:
     void handleItemClicked(QTableWidgetItem*);
-    void addKont(QString);
+    void addKonto(QString);
 };
 
 #endif // KONTENTAB_H

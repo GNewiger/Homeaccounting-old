@@ -31,12 +31,12 @@ KontenTab::KontenTab(QWidget *parent) : QWidget(parent), tableKonten(this), btnA
 void KontenTab::handleItemClicked(QTableWidgetItem* item){
     if (item == &btnAdd){
         KontoCreateDialog createDialog(this);
-        QObject::connect(&createDialog, SIGNAL(addKonto(QString)), this, SLOT(addKont(QString)));
+        QObject::connect(&createDialog, SIGNAL(addKonto(QString)), this, SLOT(addKonto(QString)));
         createDialog.exec();
     }
 }
 
-void KontenTab::addKont(QString name){
+void KontenTab::addKonto(QString name){
     QTableWidgetItem* someName = new QTableWidgetItem(name);
     QTableWidgetItem* someSaldo = new QTableWidgetItem("0");
     size_t indexLastItem = tableKonten.rowCount() - 2; // the last item is actually the add button, so insert the new item to second last position
