@@ -13,7 +13,7 @@ KontenTab::KontenTab(QWidget *parent) : QWidget(parent), tableKonten(this), btnA
     layout->addWidget(&tableKonten);
     QStringList headers;
     headers.append("Name");
-    headers.append("Typ");
+    headers.append("Saldo");
     tableKonten.setHorizontalHeaderLabels(headers);
 
     for(int i = 0; i < 11; ++i){
