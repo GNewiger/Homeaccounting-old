@@ -13,7 +13,7 @@ KontoCreateDialog::KontoCreateDialog(QWidget *parent)
     QString W = "W";
     size_t leWidth = fm.tightBoundingRect(" " + W.repeated(32) + " ").width(); // two extra spaces to account for margins etc
     ui->leName->setMinimumWidth(leWidth); // maximal 32 characters für ein Konto
-    QRegularExpression regex("[a-zA-Z0-9]{0,32}");
+    QRegularExpression regex("[a-zA-Z0-9 ]{0,32}");
     QValidator* validator = new QRegularExpressionValidator(regex, this);
     ui->leName->setValidator(validator);
 
