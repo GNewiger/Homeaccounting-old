@@ -20,6 +20,7 @@ signals:
     void addKonto(QString name);
 private slots:
     void emitAddKonto();
+    void handleSaveButtonActivation(QString text);
 };
 
 #endif // KONTOCREATEDIALOG_H

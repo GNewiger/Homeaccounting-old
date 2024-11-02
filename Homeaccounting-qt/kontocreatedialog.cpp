@@ -17,9 +17,16 @@ KontoCreateDialog::KontoCreateDialog(QWidget *parent)
     QValidator* validator = new QRegularExpressionValidator(regex, this);
     ui->leName->setValidator(validator);
 
+    ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(false); // weil noch kein Name eingegeben ist
+
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Save), SIGNAL(clicked()), this, SLOT(emitAddKonto()));
+    QObject::connect(ui->leName, SIGNAL(textEdited(QString)), this, SLOT(handleSaveButtonActivation(QString)));
 }
 
 void KontoCreateDialog::emitAddKonto(){
     emit addKonto(ui->leName->text());
+}
+
+void KontoCreateDialog::handleSaveButtonActivation(QString text){
+    ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(1 - text.length() < 1);
 }
